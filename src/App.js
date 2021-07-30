@@ -6,6 +6,7 @@ import { Switch, Route, BrowserRouter } from 'react-router-dom';
 import { Suspense } from 'react';
 import Sessions from './components/Sessions';
 import Header1 from './components/Header1';
+import { Login2 } from './components/Login2';
 
 function App() {
   
@@ -15,10 +16,10 @@ function App() {
       <header className="App-header">
         {/* <SignIn/> */}
         {/* <Login/> */}
-        <Header1/>
       </header>
 
       <BrowserRouter>
+        <Header1/>
             
             <div className='container mx-auto'>
                 <div>
@@ -28,8 +29,8 @@ function App() {
                                 <Route path='/about' component={About} />
                             )}*/
 
-                            <Route path='/sessions' component={Sessions} /> }
-                            <Route path='/login' component={Login} />
+                            <Route path='/sessions' component={()=>  <Sessions authorized={false}/>} /> }
+                            <Route path='/login' component={Login2} />
 
                             {/* <Redirect from='/' to='/posts' exact />
                             <Route path='*' component={NotFound} /> */}

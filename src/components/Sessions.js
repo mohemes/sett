@@ -2,41 +2,40 @@ import * as React from 'react';
 import axios from "axios";
 //import { Switch, Route } from 'react-router-dom';
 import Cookie from "./sub/Cookie";
+import { Link } from 'react-router-dom';
+import DataTable from './sub/DataTable';
 
+function getSessions (){
+  const tokenStr = Cookie.get("token");
 axios
-      .post(
-        "http://miniver.rahasec.com:8083/api/v2/auth/login",
-        {
-            username: 'admin',
-            password: 'adminadminadmin'
-        }
+      .get(
+        "http://miniver.rahasec.com:8083/api/v2/settings/session", { headers: {"Authorization" : `${tokenStr}`} }
       )
       .then(response => {
         console.log("responsedata:", response.data);
-        console.log("responsedata suc:", response.data.success);
-        if (response.data.success.toString() === "true") {
-          console.log("responsedata token:", response.data.token);
-          this.setState({token:response.data.token })
-        //   this.props.handleSuccessfulAuth(response.data);
-        Cookie.set('token', `Bearer ${response.data.token}`, {
-            path: '/',
-            maxAge: 60 * 60 * 24
-        });
-
+        return response.data;
         
-        }else{
-            console.log("OOOOOOOOOO responsedata suc:", response.data.success);
-
-        }
       })
       .catch(error => {
         console.log("login error", error);
-      });
+        return JSON.stringify(error);
 
-export default function Sessions() {
+      });
+    }
+export default function Sessions({authorized}) {
+  if(!authorized){
   return (
     <div style={{ height: 400, width: '100%' }}>
-      Sections.............................
+      Sections...........Authorized :)..................
+      {/* <p>{getSessions()}</p> */}
+      <DataTable />
     </div>
   );
+  }else{
+    return (
+      <div>Sections Not Authorized
+      <p><Link to={"/login"}>pls login</Link></p>
+      </div>
+    );
+  }
 }

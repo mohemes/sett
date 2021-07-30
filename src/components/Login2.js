@@ -4,29 +4,31 @@ import { Switch, Route } from 'react-router-dom';
 import Cookie from "./sub/Cookie";
 import { Redirect } from "react-router";
 
-export default class Login extends Component {
-  constructor(props) {
-    super(props);
+import { useHistory } from 'react-router-dom'
+//export default class Login extends Component {
+//   constructor(props) {
+//     super(props);
 
-    this.state = {
-      user: "admin",
-      password: "adminadminadmin",
-      loginErrors: "",
-      token : ""
-    };
+//     this.state = {
+//       user: "admin",
+//       password: "adminadminadmin",
+//       loginErrors: "",
+//       token : ""
+//     };
     
 
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-  }
-  handleChange(event) {
-    this.setState({
-      [event.target.name]: event.target.value
-    });
-  }
+//     this.handleSubmit = this.handleSubmit.bind(this);
+//     this.handleChange = this.handleChange.bind(this);
+//   }
+//   handleChange(event) {
+//     this.setState({
+//       [event.target.name]: event.target.value
+//     });
+//   }
 
-  handleSubmit(event) {
-    const { user, password } = this.state;
+ function handleSubmit(event) {
+    const  user = "admin" ;
+    const password =  "adminadminadmin";
 
     axios
       .post(
@@ -37,19 +39,23 @@ export default class Login extends Component {
         }
       )
       .then(response => {
+
         console.log("responsedata:", response.data);
         console.log("responsedata suc:", response.data.success);
+
         if (response.data.success.toString() === "true") {
           console.log("responsedata token:", response.data.token);
-          this.setState({token:response.data.token })
+          //this.setState({token:response.data.token })
         //   this.props.handleSuccessfulAuth(response.data);
+
         Cookie.set('token', `Bearer ${response.data.token}`, {
             path: '/',
             maxAge: 60 * 60 * 24
         });
         alert("Success");
+        
         //todo: redirect to another page (router)
-        <Redirect to={"/sessions"} />
+        <Redirect to='/sessions' />
         }else{
             console.log("OOOOOOOOOO responsedata suc:", response.data.success);
 
@@ -57,20 +63,23 @@ export default class Login extends Component {
       })
       .catch(error => {
         console.log("login error", error);
+        alert("bad");
+
       });
     event.preventDefault();
   }
 
-  render() {
+  export const Login2 =(props)=> {
+    const history = useHistory()
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form onSubmit={handleSubmit} afterSubmit={() => history.push('/settings')}>
           <input
             type="user"
             name="user"
             placeholder="user"
-            value={this.state.user}
-            onChange={this.handleChange}
+            value="admin"
+            //onChange={this.handleChange}
             required
           />
 
@@ -78,8 +87,8 @@ export default class Login extends Component {
             type="password"
             name="password"
             placeholder="Password"
-            value={this.state.password}
-            onChange={this.handleChange}
+            value="adminadminadmin"
+            //onChange={this.handleChange}
             required
           />
 
@@ -88,4 +97,3 @@ export default class Login extends Component {
       </div>
     );
   }
-}
