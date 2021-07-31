@@ -5,3 +5,22 @@
   background-color: aqua;
   height: 100px;
 }
+
+.theside{
+  background-color: rgb(218, 172, 240);
+  position: fixed;
+  height: 100%;
+  width: 200px;
+}
+
+.maincls{
+  margin-left: 200px;
+}
+
+.keyvalLabel {
+  background-color: rgb(171, 247, 211);
+  
+}
+table {
+  margin-left: 20%;
+}

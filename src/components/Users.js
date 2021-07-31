@@ -3,7 +3,7 @@ import axios from "axios";
 //import { Switch, Route } from 'react-router-dom';
 import Cookie from "./sub/Cookie";
 import { Link } from 'react-router-dom';
-import SessionsDG from './sub/SessionsDG';
+import UsersDG from './sub/UsersDG';
 
 function getSessions (){
   const tokenStr = Cookie.get("token");
@@ -22,18 +22,18 @@ axios
 
       });
     }
-export default function Sessions({authorized}) {
+export default function Users({authorized}) {
   if(!authorized){
   return (
     <div style={{ height: 400, width: '100%' }}>
-      Sections...........Authorized :)..................
+      Section Users...........Authorized :)..................
       {/* <p>{getSessions()}</p> */}
-      <SessionsDG />
+      <UsersDG />
     </div>
   );
   }else{
     return (
-      <div>Sections Not Authorized
+      <div>Section User Not Authorized
       <p><Link to={"/login"}>pls login</Link></p>
       </div>
     );

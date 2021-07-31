@@ -3,15 +3,15 @@ import { Link } from 'react-router-dom';
 
 
 
-export const Header1= (props)=> {
+export const SidePanel= (props)=> {
   return (
-    <div class='theheader'>
+    <div class='theside'>
       The header
       {/* <li><Link to={"/login"}>Login</Link></li> */}
-      {/* <li><Link to={"/users"}>users</Link></li>
+      <li><Link to={"/users"}>users</Link></li>
       <li><Link to={"/setting"}>settings</Link></li>
-      <li><Link to={"/sessions"}>sessions</Link></li> */}
+      <li><Link to={"/sessions"}>sessions</Link></li>
     </div>
   );
 }
-export default Header1
+export default SidePanel

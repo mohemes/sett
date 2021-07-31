@@ -9,6 +9,7 @@ const columns = [
  {field: 'id', headerName: 'IDdfg' },
   {field: 'createTime', headerName: 'CreateTime', width: 300},
   {field: 'lastRequestTime', headerName: 'LastRequestTime', width: 600},
+  {field: 'username', headerName: 'user', width: 600},
   {
     field: "",
     headerName: "Action",
@@ -23,7 +24,7 @@ const columns = [
         const thisRow = {};
 
         fields.forEach((f) => {
-          thisRow[f] = params.getValue(f);
+          thisRow[f] = params.getValue(params.id,f);
         });
 
         return alert(JSON.stringify(thisRow, null, 4));
@@ -35,46 +36,35 @@ const columns = [
 ]
 const tokenStr = Cookie.get("token");
 
-const DataTable = () => {
+
+const SessionsDG = () => {
 
   const [tableData, setTableData] = useState([])
 
- useEffect(() => {
-//    fetch(
-//     "http://miniver.rahasec.com:8083/api/v2/settings/session", 
-//     // { headers: {"Authorization" : `${tokenStr}`} }   
+  useEffect(() => {
+    fetchdata();
+  }, []);
 
-//     { 
-//         method: 'get', 
-//         headers: new Headers({
-//           'Authorization': tokenStr, 
-//           'Content-Type': 'application/x-www-form-urlencoded'
-//         })
-//     }
-
-//    )
-//     .then((data) => {console.log("thedata:" , data); data.json()})
-//     .then((data) => setTableData(data))
-
+  const fetchdata = () => {
     axios.get(
-    "http://miniver.rahasec.com:8083/api/v2/settings/session", { headers: {"Authorization" : `${tokenStr}`} }
-    )
-    .then(response => {
-        console.log("responsedata:", response.data);
-        let rr= response.data;
-        rr.map((rr) => {
-            rr['id'] = rr._id
+        "http://miniver.rahasec.com:8083/api/v2/settings/session", { headers: {"Authorization" : `${tokenStr}`} }
+        )
+        .then(response => {
+            console.log("responsedata:", response.data);
+            let rr= response.data;
+            rr.map((rr) => {
+                rr['id'] = rr._id
+                rr['username'] = rr.loginID.username
+            })
+            setTableData(rr);
+        
         })
-        setTableData(rr);
+        .catch(error => {
+        console.log("login error", error);
+        return JSON.stringify(error);
     
-    })
-    .catch(error => {
-    console.log("login error", error);
-    return JSON.stringify(error);
-
-    });
- })
-
+        });
+    }
   return (
     <div style={{height: 700, width: '100%'}}>
       <DataGrid 
@@ -87,4 +77,4 @@ const DataTable = () => {
   )
 }
 
-export default DataTable
+export default SessionsDG

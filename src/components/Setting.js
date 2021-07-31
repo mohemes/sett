@@ -3,13 +3,13 @@ import axios from "axios";
 //import { Switch, Route } from 'react-router-dom';
 import Cookie from "./sub/Cookie";
 import { Link } from 'react-router-dom';
-import SessionsDG from './sub/SessionsDG';
+import SettingsDG from './sub/SettingsDG';
 
 function getSessions (){
   const tokenStr = Cookie.get("token");
 axios
       .get(
-        "http://miniver.rahasec.com:8083/api/v2/settings/session", { headers: {"Authorization" : `${tokenStr}`} }
+        "http://miniver.rahasec.com:8083/api/v2/settings", { headers: {"Authorization" : `${tokenStr}`} }
       )
       .then(response => {
         console.log("responsedata:", response.data);
@@ -22,18 +22,18 @@ axios
 
       });
     }
-export default function Sessions({authorized}) {
+export default function Setting({authorized}) {
   if(!authorized){
   return (
     <div style={{ height: 400, width: '100%' }}>
-      Sections...........Authorized :)..................
+      Section setting...........Authorized :)..................
       {/* <p>{getSessions()}</p> */}
-      <SessionsDG />
+      <SettingsDG />
     </div>
   );
   }else{
     return (
-      <div>Sections Not Authorized
+      <div>Section setting Not Authorized
       <p><Link to={"/login"}>pls login</Link></p>
       </div>
     );
