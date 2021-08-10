@@ -37,7 +37,7 @@ const columns = [
 const tokenStr = Cookie.get("token");
 
 
-const SessionsDG = () => {
+const UsersDG = () => {
 
   const [tableData, setTableData] = useState([])
 
@@ -77,4 +77,4 @@ const SessionsDG = () => {
   )
 }
 
-export default SessionsDG
+export default UsersDG

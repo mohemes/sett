@@ -25,8 +25,8 @@ axios
 export default function Sessions({authorized}) {
   if(!authorized){
   return (
-    <div style={{ height: 400, width: '100%' }}>
-      Sections...........Authorized :)..................
+    <div style={{ height: 400, width: '100%' }} >
+      <div class="sectionTop" >     Section session...........Authorized :)..................</div>
       {/* <p>{getSessions()}</p> */}
       <SessionsDG />
     </div>

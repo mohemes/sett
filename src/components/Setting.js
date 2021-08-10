@@ -26,8 +26,8 @@ export default function Setting({authorized}) {
   if(!authorized){
   return (
     <div style={{ height: 400, width: '100%' }}>
-      Section setting...........Authorized :)..................
-      {/* <p>{getSessions()}</p> */}
+      <div class="sectionTop" >Section setting...........Authorized :)..................</div>
+     
       <SettingsDG />
     </div>
   );

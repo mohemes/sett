@@ -4,7 +4,7 @@ import Cookie from './Cookie'
 import axios from 'axios';
 
 const tokenStr = Cookie.get("token");
-
+let formRef = null;
 
 const SessionsDG = () => {
 
@@ -33,8 +33,20 @@ const SessionsDG = () => {
     }
 
    function handleSubmit(event) {
+
+
+      console.log(event);
       //alert('A name was submitted: ' + this.state.value);
-      //event.preventDefault();
+      let rr=event.target;
+      var rr2={};
+      for (let index = 0; index < rr.length; index++) {
+        const element = rr[index];
+        if(element.name.length > 0 && !element.name.startsWith('[')){
+          rr2[element.name] = element.value;
+        }
+      }
+      console.log("mod: " , rr2);
+      event.preventDefault();
     }
 
     function handleChange(event) {
@@ -42,21 +54,21 @@ const SessionsDG = () => {
     }
   return (
     <div style={{height: 700, width: '100%'}}>
-      <form onSubmit={handleSubmit}>
+      <form ref={ref => formRef = ref} onSubmit={handleSubmit}>
       <table>
         {Object.keys(settingkeyval).map((innerAttr, index) => {
           return (
               // <span key={index}> {innerAttr}:  {settingkeyval[innerAttr]}<br/></span>
               
               <tr>
-                <td><label class="keyvalLabel">{innerAttr}: </label></td>
-                <td><input class="keyvalInput" type="text" value={settingkeyval[innerAttr]} onChange={handleChange} /></td>
+                <td class="keyvaltd"><label class="keyvalLabel">{innerAttr}: </label></td>
+                <td><input class="keyvalInput" name={innerAttr} type="text" value={settingkeyval[innerAttr]} onChange={handleChange} /></td>
               </tr>
               
           )})
         }
+        <tr><td></td> <td><input type="submit" value="Save All" /></td></tr>
         </table>
-        <input type="submit" value="Save All" />
       </form>
     </div>
   )

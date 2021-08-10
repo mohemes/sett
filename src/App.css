@@ -1,18 +1,58 @@
 .App {
   text-align: center;
+  background-color: whitesmoke;
 }
 .theheader{
-  background-color: aqua;
+  background: linear-gradient(
+-8deg
+,#1e2b3c 60%,#25354a);
   height: 100px;
+  color:yellowgreen;
+}
+a:link {
+  color: red;
 }
 
+/* visited link */
+a:visited {
+  color: green;
+}
+
+/* mouse over link */
+a:hover {
+  color: hotpink;
+}
+
+/* selected link */
+a:active {
+  color: blue;
+  
+}
 .theside{
-  background-color: rgb(218, 172, 240);
+  background: linear-gradient(
+-8deg
+,#1e2b3c 30%,#25354a);
   position: fixed;
   height: 100%;
-  width: 200px;
-}
+  width: 180px;
+  color:yellowgreen;
+  text-align: left;
+  padding-left: 20px;
 
+}
+.theside li{
+  list-style-type: none;
+
+}
+.active{
+  background-color: tomato;
+  padding: 10px 10px;
+}
+.sectionTop{
+  background: linear-gradient(green , #25354a);
+  color:white;
+  height: 40px;
+}
 .maincls{
   margin-left: 200px;
 }
@@ -20,6 +60,9 @@
 .keyvalLabel {
   background-color: rgb(171, 247, 211);
   
+}
+.keyvaltd{
+  text-align: right;
 }
 table {
   margin-left: 20%;
